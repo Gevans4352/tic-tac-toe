@@ -1,0 +1,48 @@
+Steps for my game.
+
+Enter name then select enter then the text will change to enter player 2 then player 2 will enter his name n select enter
+
+ then the input will no longer show n only the sticks will be there, but if nothing is entered then get an alert of "name 
+ 
+ must be filled out" else if someone put numbers or symbols then the input will not work. If all things being equal it 
+ 
+ works then you will get an alert for player 1 to tap start following by player 2, then player 1 will then tap on 
+ 
+ wherever he/she wants to then player 2 until there is a winner the sticks will dissapear and it will show whether player
+ 
+  1/2 wins if it is a tie the sticks will go hidden and a messge will show "NO WINNER IN THIS ROUND" then if u want to 
+  
+  play again you will just start reset and follow the steps again.
+
+  IF THE PLAYER 2 ENTERS THEIR NAME THEN HIDE FORM//
+  SELECT START THEN GET A DROP DOWN: PLAYER X OR PLAYER O THEN SELECT ONE THEN WHEN YOU TAP ON A SIDE OF THE BOARD LET T
+  THE ONE YOU PICK SHOW.
+
+  WHEN YOU TAP PLAY AS X THEN WHEN YOU TAP ON A GRID IT SHOULD PLAY UNLESS THE GRID SHOULD BE DISABLE
+gridItems.forEach(item => item.classList.add("disabled"));
+
+this.playerTurn = Math.random() > 0.5 ? "X" : "O";
+  window.onload = startCountdown;
+      gridItems.forEach(item => item.classList.remove("disabled"));
+
+
+          document.getElementById('primarybtn').addEventListener('click', () => {
+        if (grid.element.classList.contains('disablegrid')) {
+            grid.element.classList.remove('disablegrid');
+            document.getElementById("GridParent").classList.remove('wrapper');
+        }
+        else {
+            grid.element.classList.add('disablegrid');
+            document.getElementById("GridParent").classList.add('wrapper');
+        }
+    });
+    playerX.addEventListener("click", function () {
+        playerTurn = "X";
+        playerSelection.classList.add("hidden");
+      });
+      
+      playerO.addEventListener("click", function () {
+        playerTurn = "O"; 
+        playerSelection.classList.add("hidden");
+      });
+    
