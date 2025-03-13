@@ -45,4 +45,57 @@ this.playerTurn = Math.random() > 0.5 ? "X" : "O";
         playerTurn = "O"; 
         playerSelection.classList.add("hidden");
       });
-    
+
+
+
+
+      gameBoxes.forEach((val, idx) => {
+        val.addEventListener(
+          "click",
+          function () {
+            if (!firstPlayerName || !secondPlayerName) {
+              alert("2 player name needed");
+            } else {
+              debugger;
+              val.textContent = playerTurn;
+              gameBoard[idx] = val.textContent;
+              if (checkWinner()) {
+                Results.style.display = "block";
+                setTimeout(() => {
+                  alert(`${winner} wins`);
+                }, 10);
+              } else if (isBoardFull()) {
+                Results.style.display = "block";
+                setTimeout(() => {
+                  alert("There is a tie");
+                }, 10);
+              } else {
+                playerTurn = playerTurn == "X" ? "O" : "X";
+              }
+            }
+          },
+          { once: true }
+        );
+      });
+      
+      function checkWinner() {
+        return winningCondition.some(function (val) {
+          const [pos1, pos2, pos3] = val;
+          if (
+            gameBoard[pos1] &&
+            gameBoard[pos1] == gameBoard[pos2] &&
+            gameBoard[pos1] == gameBoard[pos3]
+          ) {
+            debugger;
+            winner = gameBoard[pos1] == "X" ? firstPlayerName : secondPlayerName;
+            return true;
+          } else {
+            return false;
+          }
+        });
+      }
+      
+      function isBoardFull() {
+        return gameBoard.every(cell => cell !== "");
+      }
+

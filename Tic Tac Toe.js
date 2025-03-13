@@ -12,6 +12,70 @@ const playerSelection = document.getElementById("playerSelection");
 const playerX = document.getElementById("playerX");
 const playerO = document.getElementById("playerO");
 const countdown = document.getElementById("countdown");
+const mute = document.getElementsByClassName("Mute");
+// document.getElementsByClassName("Mute").muted = true;
+var audio;
+
+
+function play() {
+  if(!audio) {
+    audio = new Audio('jazz.mp3');
+    audio.loop = true;
+  } else {
+    audio = new Audio('jazz.mp3');
+    audio.play();
+  }
+  audio.play();
+}
+
+function stopMusic(){
+
+  if(audio) {
+    audio.muted = true;
+    // audio.pause(); this works too!
+  }
+}
+
+
+function toggleDropdown() {
+  const dropdown = document.querySelector('.pmfgs');
+  dropdown.classList.toggle('open');
+}
+const  inputEl = document.querySelector(".input");
+console.log(inputEl.checked);
+const bodyEl = document.querySelector("body");
+
+inputEl.checked = JSON.parse(localStorage.getItem("mode")) || false;
+updateBody();
+
+function updateBody(){
+if(inputEl.checked){
+    bodyEl.style.background ="black";
+}else if(inputEl.checked){
+    bodyEl.style.background = "light-grey";
+}else{
+    bodyEl.style.background = "white";
+}
+}
+inputEl.addEventListener("input", ()=>{
+    updateBody();
+});
+inputEl.addEventListener("mode", () => {
+  localStorage.setItem("mode", JSON.stringify(inputEl.checked));
+  updateBody();
+});
+
+function updateLocalStorage(){
+    localStorage.setItem("mode", JSON.stringify(inputEl.checked));
+}
+
+function showSteps() {
+  document.getElementById("popup").style.display = "block";
+}
+
+function hideSteps() {
+  document.getElementById("popup").style.display = "none";
+}
 
 let playerTurn = "";
 
@@ -27,6 +91,7 @@ let currentPlayer = "X";
 let gameActive = true;
 
 let winner = "";
+var countdownAudio = new Audio('alarm.wav');
 // const TIE = "TIE";
 timeLeft = 3;
 
@@ -34,9 +99,11 @@ function countdownTimer() {
   timeLeft--;
   countdown.innerHTML = String(timeLeft);
   if (timeLeft > 0) {
+    countdownAudio.play();
     setTimeout(countdownTimer, 1000);
   }
   if (timeLeft === 0) {
+    countdownAudio.pause();
     countdown.style.display = "none";
   }
 }
@@ -79,6 +146,10 @@ Submit.addEventListener("click", function () {
   resetUsernameInput();
 });
 
+function isBoardFull() {
+  return gameBoard.every(cell => cell !== null); 
+}
+
 gameBoxes.forEach((val, idx) => {
   val.addEventListener(
     "click",
@@ -94,9 +165,15 @@ gameBoxes.forEach((val, idx) => {
           setTimeout(() => {
             alert(`${winner} wins`);
           }, 10);
-        }
+        } else if (isBoardFull()) {
+          Results.style.display = "block";
+          setTimeout(() => {
+            alert("There is a tie");
+          }, 10);
+        }  else {
         playerTurn = playerTurn == "X" ? "O" : "X";
       }
+    }
     },
     { once: true }
   );
@@ -111,13 +188,19 @@ function checkWinner() {
       gameBoard[pos1] == gameBoard[pos3]
     ) {
       debugger;
-      winner = gameBoard[pos1] == "X" ? firstPlayerName : secondPlayerName;
+      if (gameBoard[pos1] === "X") {
+        winner = playerTurn === "X" ? firstPlayerName : secondPlayerName;
+      } else if (gameBoard[pos1] === "O") {
+        winner = playerTurn === "O" ? firstPlayerName : secondPlayerName;
+      }
+      // winner = gameBoard[pos1] == "X" ? firstPlayerName : secondPlayerName;
       return true;
     } else {
       return false;
     }
   });
 }
+
 
 startButton.addEventListener("click", function () {
   countdown.style.display = "block";
@@ -156,3 +239,17 @@ resetButton.onclick = function reset() {
   Results.style.display = "none";
   window.location.reload();
 };
+
+
+
+
+// const remoteCotrol = {
+  
+// }
+
+// const intern = {
+//   name:"feranmi",
+//   age:18,
+//   gender:"Female"
+// }
+// const remoteCotrol = Object.create();

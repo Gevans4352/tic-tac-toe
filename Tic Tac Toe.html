@@ -3,13 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" >
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="./TicTacToe.css" />
   </head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_drop_down" />
   <body>
     <div id="countdown">3</div>
     <div id="game"></div>
+    <input type="checkbox" id="dark-mode" class="input">
+    <label for="dark-mode" class="label">
+      <div class="circle"></div>
+    </label>
+    <div class="Steps">
     <div id="content" class="Container">
+      <button class="Instruction" onclick="showSteps()">Steps</button>
+      <button id="btn" class="Tunes" onclick="toggleDropdown()">Tunes</button>
+      <nav>
+        <ul class="pmfgs">
+          <li><button onclick="play()" class="play">Play</button></li>
+          <li><button onclick="stopMusic()" class="Mute">Mute</button></li>
+        </ul>
+      </nav>
+      <div class = "popup" id="popup">
+        <p class="stepsInfo">These are the game instructions <br> . players must enter their names <br> . Players must select a team <br> . Click the start button <br> . First player plays first <br> . When done with the game tap reset</p>
+        <button type = "button" class="btn-cancel" onclick="hideSteps()">cancel</button>
+      </div>
       <h1 class="tictac">TIC-TAC-TOE</h1>
       <form class="playerForms2" id="Players">
         <label for="Player-1" id="enterPlayer">Enter Player 1: </label>
@@ -34,7 +53,7 @@
         <div class="box-9 item"></div>
       </div>
       <div class="button">
-        <button id="startButton" class="start">START</button>
+        <button onclick="countdownPlay()" id="startButton" class="start">START</button>
         <button id="resetButton" class="reset">RESET</button>
       </div>
       <div id="playerSelection" class="hidden">
@@ -44,10 +63,10 @@
       <div id = "Results" class = "hidden">
         <h2> Thank you for playing</h2>
       </div>
-      <div id = "Result-2" class = "hidden">
+      <!-- <div id = "Result-2" class = "hidden">
         <h2> Thank you for playing</h2>
         <p>  Player-2 WINS</p>
-      </div>
+      </div> -->
     </div>
     <script src="./Tic Tac Toe.js"></script>
   </body>
