@@ -1,4 +1,4 @@
-Tic-Tac-Toe 🎉
+TicTactics 🎉
 Hey hey! Welcome to the coolest Tic-Tac-Toe game on the web no pencils, no paper, just pure finger-tapping action. Ready to flex your brain and crush your opponents? Let’s get it!
 
 What’s This? 🤔
